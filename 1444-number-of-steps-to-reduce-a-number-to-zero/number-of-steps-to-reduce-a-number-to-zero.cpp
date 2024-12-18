@@ -1,6 +1,16 @@
 class Solution {
 public:
     int numberOfSteps(int num) {
-        return num ? __builtin_popcount(num) + 31 - __builtin_clz(num) : 0;
+        int count = 0;
+        while(num){
+            if(num%2){ // odd
+                --num;
+            }
+            else{ // even
+                num>>=1; // num=num/2
+            }
+            ++count;
+        }
+        return count;
     }
 };

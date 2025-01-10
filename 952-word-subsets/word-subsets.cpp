@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
-vector<int> bmax(26, 0); 
+        vector<int> bmax(26, 0); 
         for (const string& b : words2) {
             vector<int> bCount = count(b);
             for (int i = 0; i < 26; ++i) {

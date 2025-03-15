@@ -1,8 +1,7 @@
 class Solution {
 public:
     int minCapability(vector<int>& nums, int k) {
-        int minReward = 1, maxReward = *max_element(nums.begin(), nums.end()),
-            totalHouses = nums.size();
+        int minReward = 1, maxReward = *max_element(nums.begin(), nums.end()),totalHouses = nums.size();
         while (minReward < maxReward) {
             int midReward = (minReward + maxReward) / 2;
             int possibleThefts = 0;
@@ -10,7 +9,7 @@ public:
             for (int index = 0; index < totalHouses; ++index) {
                 if (nums[index] <= midReward) {
                     possibleThefts += 1;
-                    index++;  
+                    index++;
                 }
             }
 

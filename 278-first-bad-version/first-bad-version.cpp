@@ -8,7 +8,8 @@ public:
         while(left<=right)
         {
             int mid=left+(right-left)/2;
-            if(isBadVersion(mid))
+            bool bad=isBadVersion(mid);
+            if(bad==1)
             {
                 firstBad=mid;
                 right=mid-1;

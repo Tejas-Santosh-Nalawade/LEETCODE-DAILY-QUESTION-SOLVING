@@ -11,10 +11,34 @@
  */
 class Solution {
 public:
-    bool isUnivalTree(TreeNode* root) {
-        if (root==NULL) return true;
-        if (root->left != NULL && root->left->val != root->val) return false;
-        if (root->right != NULL && root->right->val != root->val) return false;
-        return isUnivalTree(root->left) && isUnivalTree(root->right);
+
+bool inorder(TreeNode* root, int target) {
+    if (root == NULL) {
+        return true;
     }
+    bool leftAns = inorder(root->left, target);
+    if(leftAns == false) {
+        return false;
+    }
+    if (root->val != target) {
+        return false;
+    }
+    bool rightAns = inorder(root->right, target);
+    if (rightAns == false) {
+        return false;
+    }
+    return true;
+}
+
+
+bool isUnivalTree(TreeNode* root) {
+    // corner/edge case: if the tree is empty, it is considered univalued
+    if (root == NULL) {
+        return true;
+    }
+    int target = root->val;
+    // check if the left and right children are NULL or have the same value as the root
+    return inorder(root, target);
+}
+
 };

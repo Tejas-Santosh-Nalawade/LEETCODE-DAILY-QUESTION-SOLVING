@@ -6,13 +6,13 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
  * };
  */
 
-
 class Packet {
-   public: 
+public:
     int min, max, sum;
     bool isBST;
     Packet(int min, int max, int sum, bool isBST) {
@@ -36,8 +36,9 @@ public:
 
         int current_sum = curr->val + left->sum + right->sum;
 
-        bool current_is_bst = (left->max < curr->val && right->min > curr->val &&
-                               left->isBST && right->isBST);
+        bool current_is_bst =
+            (left->max < curr->val && right->min > curr->val && left->isBST &&
+             right->isBST);
 
         if (current_is_bst) {
             ans = max(ans, current_sum);
@@ -52,5 +53,4 @@ public:
         rec(root);
         return ans;
     }
-
 };

@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int ans = -1;
+    int ans = 0;
     // using counter variable
     void optimize(TreeNode* root, int&count, int&ans, int k)
     {
@@ -45,7 +45,7 @@ public:
     }
     int kthSmallest(TreeNode* root, int k) {
         int count= 0;
-        ans =-1;
+        ans =0;
         // optimize(root, count, ans , k);
         inOrder(root, k);
         return ans;

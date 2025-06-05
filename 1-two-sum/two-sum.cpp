@@ -17,6 +17,6 @@ public:
                 hm[nums[i]] = i;
             }
         }
-        return {};
+        return {-1};
     }
 };

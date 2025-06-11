@@ -21,7 +21,7 @@ public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
         // edge list is provide first convert to adjacency list
         vector<vector<int>> adj(n);
-        vector<bool>vis(n);
+        
         for(auto &e : edges)
         {
             int u = e[0] , v=e[1];
@@ -29,6 +29,7 @@ public:
             adj[v].push_back(u);
 
         }
+        vector<bool>vis(n,false);
         return dfs(source, destination, adj, vis);
     }
 };

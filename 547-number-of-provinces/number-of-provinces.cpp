@@ -7,7 +7,6 @@ public:
         while(q.size() !=0){
             src= q.front();
             q.pop();
-
             if(vis[src]) continue;  // Cycle
             vis[src] = true;
 
@@ -38,6 +37,5 @@ public:
             }
         }
         return count;
-
     }
 };

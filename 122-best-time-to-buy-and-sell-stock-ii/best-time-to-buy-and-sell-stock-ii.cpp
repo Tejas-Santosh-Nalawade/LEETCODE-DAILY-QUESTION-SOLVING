@@ -4,7 +4,7 @@ int rec(int i , vector<int> &prices, int buyStatus, int n , vector<vector<int>> 
     if(i == n){
         return 0;
     }
-    // check if this subProbelm is already Calculated
+    // check if this subProblem is already Calculated
 
     if(dp[i][buyStatus] !=-1){
         return dp[i][buyStatus];

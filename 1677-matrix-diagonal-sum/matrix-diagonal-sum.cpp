@@ -1,20 +1,15 @@
 class Solution {
 public:
-    int diagonalSum(vector<vector<int>>& matrix) {
-        int sum =0;
-        int n = matrix.size();
+    int diagonalSum(vector<vector<int>>& mat) {
+        int sum = 0;
+        int n = mat.size();
         for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-            // Primary Diagonal Sum
-                if(i == j ){
-                    sum+=matrix[i][j];
-                }
-                // Secondary Diagonal
-                else if(j == n-i-1){
-                    sum+=matrix[i][j];
-                }
+            sum += mat[i][i];
+            if(i !=n-i-1){
+                sum+=mat[i][n-i-1];
             }
-        } 
+        }
         return sum;
     }
+    
 };

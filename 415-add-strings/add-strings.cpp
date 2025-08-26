@@ -3,7 +3,7 @@ public:
     std::string addStrings(std::string num1, std::string num2) {
         int i = num1.size() - 1, j = num2.size() - 1;
         int carry = 0;
-        std::string result;
+        string result;
 
         while (i >= 0 || j >= 0 || carry) {
             int digit1 = (i >= 0) ? num1[i] - '0' : 0;

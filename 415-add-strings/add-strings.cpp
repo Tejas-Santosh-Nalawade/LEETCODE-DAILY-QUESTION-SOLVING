@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string addStrings(std::string num1, std::string num2) {
+    string addStrings(string num1, string num2) {
         int i = num1.size() - 1, j = num2.size() - 1;
         int carry = 0;
         string result;

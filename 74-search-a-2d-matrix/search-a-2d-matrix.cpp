@@ -1,26 +1,20 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int N=matrix.size();
-        int M=matrix[0].size();
-        int start=0;
-        int end=N*M-1;
-        while(start<=end)
-        {
-            int mid=start+(end-start)/2;
-            int r=mid/M;
-            int c=mid%M;
-            if(matrix[r][c]==target){
+        int n = matrix.size();
+        int m = matrix[0].size();
+        
+        int row = 0, col = m - 1; // start from top-right
+        while (row < n && col >= 0) {
+            if (matrix[row][col] == target) {
                 return true;
             }
-            if(matrix[r][c]<target)
-            {
-                start=mid+1;
+            else if (matrix[row][col] > target) {
+                col--; // move left
             }
-            else{
-                end=mid-1;
+            else {
+                row++; // move down
             }
-           
         }
         return false;
     }

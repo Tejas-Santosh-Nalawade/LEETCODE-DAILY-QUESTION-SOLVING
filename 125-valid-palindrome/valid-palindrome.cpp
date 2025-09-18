@@ -1,23 +1,28 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        int start=0;
-        int end=s.size();
-        while(start<end){
-            if(!isalnum(s[start])){
-                start++;
-                continue;
+        string t;
+        for(const auto& a:s)
+        {
+            if(a>='A' && a<='Z')
+            {
+                t.push_back(a-'A' + 'a');
             }
-            if(!isalnum(s[end])){
-                end--;
-                continue;
+            else if(a>='a' && a<='z')
+            {
+                t.push_back(a);
             }
-            if(tolower(s[start])!=tolower(s[end])){
+            else if(a>='0' && a<='9')
+            {
+                t.push_back(a);
+            }
+        }
+        int len = t.size();
+        for(int i=0; i<len/2; ++i)
+        {
+            if(t[i] != t[len-i-1])
+            {
                 return false;
-            }
-            else{
-                start++;
-                end--;
             }
         }
         return true;

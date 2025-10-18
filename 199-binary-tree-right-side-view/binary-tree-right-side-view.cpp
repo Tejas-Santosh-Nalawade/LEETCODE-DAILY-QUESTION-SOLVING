@@ -12,7 +12,6 @@
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
-        // unordered_map<int,int>map;
         vector<int>ans;
         int level=-1;
         traverseRightSide(root,level,0,ans);

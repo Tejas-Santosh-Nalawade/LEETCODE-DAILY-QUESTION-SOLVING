@@ -1,33 +1,29 @@
 class Solution {
 public:
-    string longestPalindrome(string s) {
-        if (s.empty()) {
-            return "";
+    std::string longestPalindrome(std::string s) {
+        if (s.length() <= 1) {
+            return s;
         }
-
+        
+        int max_len = 1;
         int start = 0;
         int end = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            int odd = expandAroundCenter(s, i, i);
-            int even = expandAroundCenter(s, i, i + 1);
-            int max_len = max(odd, even);
-
-            if (max_len > end - start) {
-                start = i - (max_len - 1) / 2;
-                end = i + max_len / 2;
+        std::vector<std::vector<bool>> dp(s.length(), std::vector<bool>(s.length(), false));
+        
+        for (int i = 0; i < s.length(); ++i) {
+            dp[i][i] = true;
+            for (int j = 0; j < i; ++j) {
+                if (s[j] == s[i] && (i - j <= 2 || dp[j + 1][i - 1])) {
+                    dp[j][i] = true;
+                    if (i - j + 1 > max_len) {
+                        max_len = i - j + 1;
+                        start = j;
+                        end = i;
+                    }
+                }
             }
         }
-
-        return s.substr(start, end - start + 1);        
+        
+        return s.substr(start, end - start + 1);
     }
-
-private:
-    int expandAroundCenter(string s, int left, int right) {
-        while (left >= 0 && right < s.length() && s[left] == s[right]) {
-            left--;
-            right++;
-        }
-        return right - left - 1;
-    }    
 };

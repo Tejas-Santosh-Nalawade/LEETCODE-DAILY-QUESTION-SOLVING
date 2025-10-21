@@ -13,9 +13,9 @@ public:
                 while (cur->next && cur->val == cur->next->val) {
                     cur = cur->next;
                 }
-                prev->next = cur->next; // Skip all duplicates
+                prev->next = cur->next; 
             } else {
-                prev = prev->next; // Move to next unique node
+                prev = prev->next;
             }
             cur = cur->next;
         }

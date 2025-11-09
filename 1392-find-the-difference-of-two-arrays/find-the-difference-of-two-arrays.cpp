@@ -1,26 +1,26 @@
 class Solution {
 public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        std::unordered_set<int>s1(nums1.begin(),nums1.end()), s2(nums2.begin(),nums2.end());
 
-    vector<int> getinfirst(vector<int>&nums1, vector<int>&nums2){
-        unordered_set<int>existnum2;
-        unordered_set<int>result;
-        // Inserted the num2 to set
-        for(int num: nums2){
-            existnum2.insert(num);
-        }
+        vector<int>temp;
+        vector<vector<int>>ans;
 
-        // check if num1 in set
-        for(int x:nums1){
-            // if found then return the position else return to the end of set 
-            if(existnum2.find(x) == existnum2.end()){
-                result.insert(x);
+        for(auto x:s1){
+            if(!s2.count(x)){
+                temp.push_back(x);
             }
         }
-        return vector<int>(result.begin(),result.end());
-    }
+        ans.push_back(temp);
+        temp.clear();
 
+        for(auto n:s2){
+            if(!s1.count(n)){
+                temp.push_back(n);
+            }
+        }
+        ans.push_back(temp);
 
-    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
-        return {getinfirst(nums1,nums2),getinfirst(nums2,nums1)};
+        return ans;
     }
 };

@@ -1,26 +1,29 @@
 class Solution {
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
-        std::unordered_set<int>s1(nums1.begin(),nums1.end()), s2(nums2.begin(),nums2.end());
+        unordered_set<int>s1(nums1.begin(),nums1.end());
+        unordered_set<int>s2(nums2.begin(),nums2.end());
+    
+        vector<int>ans1;
 
-        vector<int>temp;
-        vector<vector<int>>ans;
+        ans1.reserve(s1.size());
 
-        for(auto x:s1){
+        for(auto x: s1){
             if(!s2.count(x)){
-                temp.push_back(x);
+                ans1.push_back(x);
             }
         }
-        ans.push_back(temp);
-        temp.clear();
 
-        for(auto n:s2){
+        vector<int>ans2;
+
+        ans2.reserve(s2.size());
+
+        for(auto n: s2){
             if(!s1.count(n)){
-                temp.push_back(n);
+                ans2.push_back(n);
             }
         }
-        ans.push_back(temp);
 
-        return ans;
+        return {ans1,ans2};
     }
 };

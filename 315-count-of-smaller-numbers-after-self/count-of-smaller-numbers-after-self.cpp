@@ -1,17 +1,28 @@
 class Solution {
+    typedef vector<pair<int, int>> Pii;
+    typedef Pii::iterator Pit;
 public:
     vector<int> countSmaller(vector<int>& nums) {
-        vector<int> result;
-        vector<int> sorted;
-        
-        for (int i = nums.size() - 1; i >= 0; --i) {
-            auto insert_pos = lower_bound(sorted.begin(), sorted.end(), nums[i]);
-            int count = insert_pos - sorted.begin();
-            result.push_back(count);
-            sorted.insert(insert_pos, nums[i]);
+        int n = nums.size();
+        vector<int> res(n);
+        Pii nums_(n);
+        for(int i = 0; i < n; ++i)
+            nums_[i] = {nums[i], i};
+        merge(nums_.begin(), nums_.end(), res);
+        return res;
+    }
+    
+    void merge(Pit begin, Pit end, vector<int>& res){
+        if(end - begin <= 1)
+            return;
+        auto mid = begin + (end - begin) / 2;
+        merge(begin, mid, res);
+        merge(mid, end, res);
+        for(auto i = begin, j = mid; i != mid; ++i){
+            while(j != end && i->first > j->first)
+                ++j;
+            res[i->second] += j - mid;
         }
-        
-        reverse(result.begin(), result.end());
-        return result;
+        inplace_merge(begin, mid, end);
     }
 };

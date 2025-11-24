@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<bool> prefixesDivBy5(vector<int>& nums) {
+        int n = nums.size();
+        vector<bool>ans;
+        int val = 0;
+        for(auto bit:nums){
+            val  = (val * 2 + bit) % 5;
+            ans.push_back(val == 0);
+        }
+        return ans;
+    }
+};

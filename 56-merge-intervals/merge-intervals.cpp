@@ -1,18 +1,12 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        int n = intervals.size();
-        sort(intervals.begin(), intervals.end());
-        vector<vector<int>>ans;
-
+        sort(intervals.begin(),intervals.end());
+        vector<vector<int>>res;
         for(auto interval: intervals){
-            if(ans.empty() || ans.back()[1] < interval[0]){
-                ans.push_back(interval);
-            }
-            else{
-                    ans.back()[1] = max(ans.back()[1], interval[1]);
-                }
+            if(res.empty() || res.back()[1] < interval[0]) res.push_back(interval);
+            res.back()[1] = max(res.back()[1], interval[1]);
         }
-        return ans;
+        return res;
     }
 };

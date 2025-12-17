@@ -3,9 +3,9 @@ public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         sort(intervals.begin(),intervals.end());
         vector<vector<int>>res;
-        for(auto interval: intervals){
-            if(res.empty() || res.back()[1] < interval[0]) res.push_back(interval);
-            res.back()[1] = max(res.back()[1], interval[1]);
+        for(int i=0; i<intervals.size(); i++){
+            if(res.empty() || res.back()[1] < intervals[i][0]) res.push_back(intervals[i]);
+            res.back()[1] = max(res.back()[1], intervals[i][1]);
         }
         return res;
     }

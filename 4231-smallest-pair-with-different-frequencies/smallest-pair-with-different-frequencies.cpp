@@ -2,20 +2,21 @@ class Solution {
 public:
     vector<int> minDistinctFreqPair(vector<int>& nums) {
         unordered_map<int,int> mp;
-        int n = nums.size();
-        for(int i=0; i<n; i++){
-            mp[nums[i]]++;
-        }
-
-        // for(int num : nums){
-        //     mp[num]++;
+        // Map using normal for loop
+        // int n = nums.size();
+        // for(int i=0; i<n; i++){
+        //     mp[nums[i]]++;
         // }
+        // Map using the range loop 
+        for(int num : nums){
+            mp[num]++;
+        }
         vector<int>res;
         for(auto &p: mp){
             res.push_back(p.first);
         }
         sort(res.begin(), res.end());
-
+        // O(N^2) approch 2 nested loops 
         for(int i=0; i<res.size(); i++){
             for(int j=i+1; j<res.size(); j++){
                 if(mp[res[i]] != mp[res[j]]){

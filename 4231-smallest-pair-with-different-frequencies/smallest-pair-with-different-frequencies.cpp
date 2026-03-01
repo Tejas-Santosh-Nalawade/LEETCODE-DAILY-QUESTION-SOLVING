@@ -2,14 +2,14 @@ class Solution {
 public:
     vector<int> minDistinctFreqPair(vector<int>& nums) {
         unordered_map<int,int> mp;
-        // int n = nums.size();
-        // for(int i=0; i<n; i++){
-        //     mp[nums[i]]++;
-        // }
-
-        for(int num : nums){
-            mp[num]++;
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            mp[nums[i]]++;
         }
+
+        // for(int num : nums){
+        //     mp[num]++;
+        // }
         vector<int>res;
         for(auto &p: mp){
             res.push_back(p.first);

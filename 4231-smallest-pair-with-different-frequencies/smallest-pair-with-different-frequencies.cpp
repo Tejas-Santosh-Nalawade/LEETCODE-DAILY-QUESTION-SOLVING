@@ -1,44 +1,35 @@
 class Solution {
 public:
     vector<int> minDistinctFreqPair(vector<int>& nums) {
-        unordered_map<int,int> mp;
-        // Map using normal for loop
-        // int n = nums.size();
-        // for(int i=0; i<n; i++){
-        //     mp[nums[i]]++;
-        // }
-        // Map using the range loop 
-        for(int num : nums){
-            mp[num]++;
+        int freq[101] ={0};
+
+        for(int num:nums){
+            freq[num]++;
         }
-        vector<int>res;
-        for(auto &p: mp){
-            res.push_back(p.first);
-        }
-        sort(res.begin(), res.end());
-        // O(N^2) approch 2 nested loops 
-        for(int i=0; i<res.size(); i++){
-            for(int j=i+1; j<res.size(); j++){
-                if(mp[res[i]] != mp[res[j]]){
-                    return{res[i], res[j]};
-                }
+
+        vector<int>values;
+
+        for(int i=0; i<=100; i++){
+            if(freq[i] > 0){
+                values.push_back(i);
             }
         }
 
-        // int smallest = nums[0];
-        // int smallest_frequency = mp[smallest];
+        if(values.size() < 2) return {-1,-1};
 
-        // for(auto &p: mp){
-        //     if(p.first !=smallest && p.second !=smallest_frequency){
-        //         res.push_back(p.first);
-        //         return res;
-        //     }
-        // }
-        return {-1,-1};
+        for(int i=0; i<values.size() - 1; i++){
+            int x = values[i];
+            int fx = freq[x];
 
-        // int freq[n + 1] = {0};
-        // for(int i=0; i<n;  i++){
-        //     freq[nums[i]]++;
-        // }
+            for(int j=i+1; j<values.size(); j++){
+                int y = values[j];
+                if(freq[y] != fx){
+                    return {x,y};
+                }
+            }
+        }
+        return{-1,-1};
+
+
     }
 };

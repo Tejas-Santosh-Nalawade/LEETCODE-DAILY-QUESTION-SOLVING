@@ -1,27 +1,40 @@
 class Solution {
 public:
     string getHappyString(int n, int k) {
-        stack<string> stringsStack;
-        int indexInSortedList = 0;
-        stringsStack.push("");
+        int total = 3 * (1 << (n - 1));
+        if (k > total) return "";
 
-        while (stringsStack.size() > 0) {
-            string currentString = stringsStack.top();
-            stringsStack.pop();
-            if (currentString.size() == n) {
-                indexInSortedList++;
-                if (indexInSortedList == k) {
-                    return currentString;
-                }
-                continue;
-            }
-            for (char currentChar = 'c'; currentChar >= 'a'; currentChar--) {
-                if (currentString.size() > 0 &&
-                    currentString.back() == currentChar)
-                    continue;
-                stringsStack.push(currentString + currentChar);
+        string result(n, 'a');
+
+        unordered_map<char, char> nextSmallest = {
+            {'a', 'b'}, {'b', 'a'}, {'c', 'a'}};
+        unordered_map<char, char> nextGreatest = {
+            {'a', 'c'}, {'b', 'c'}, {'c', 'b'}};
+        int startA = 1;
+        int startB = startA + (1 << (n - 1));
+        int startC = startB + (1 << (n - 1));
+
+        if (k < startB) {
+            result[0] = 'a';
+            k -= startA;
+        } else if (k < startC) {
+            result[0] = 'b';
+            k -= startB;
+        } else {
+            result[0] = 'c';
+            k -= startC;
+        }
+
+        for (int charIndex = 1; charIndex < n; charIndex++) {
+            int midpoint = (1 << (n - charIndex - 1));
+            if (k < midpoint) {
+                result[charIndex] = nextSmallest[result[charIndex - 1]];
+            } else {
+                result[charIndex] = nextGreatest[result[charIndex - 1]];
+                k -= midpoint;
             }
         }
-        return "";
+
+        return result;
     }
 };

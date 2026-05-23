@@ -2,26 +2,17 @@ class Solution {
 public:
     bool check(vector<int>& nums) {
         int n = nums.size();
-        vector<int> checkSorted(n);
-        for (int rotationOffset = 0; rotationOffset < n; ++rotationOffset) {
-            int currIndex = 0;
-            for (int index = rotationOffset; index < n; ++index) {
-                checkSorted[currIndex++] = (nums[index]);
-            }
-            for (int index = 0; index < rotationOffset; ++index) {
-                checkSorted[currIndex++] = (nums[index]);
-            }
-            bool isSorted = true;
-            for (int index = 0; index < n - 1; ++index) {
-                if (checkSorted[index] > checkSorted[index + 1]) {
-                    isSorted = false;
-                    break;
-                }
-            }
-            if (isSorted) {
-                return true;
+        if (n <= 1) return true;
+        int inversionCount = 0;
+        for (int i = 1; i < n; ++i) {
+            if (nums[i] < nums[i - 1]) {
+                ++inversionCount;
+                if (inversionCount > 1) return false;
             }
         }
-        return false;
+        if (nums[0] < nums[n - 1]) {
+            ++inversionCount;
+        }
+        return inversionCount <= 1;
     }
 };

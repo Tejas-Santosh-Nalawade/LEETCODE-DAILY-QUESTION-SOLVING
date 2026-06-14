@@ -1,31 +1,24 @@
 class Solution {
-    public:
-     int pairSum(ListNode* head) {
+public:
+    int pairSum(ListNode* head) {
+        vector<int> half;
         ListNode* slow = head;
         ListNode* fast = head;
-        int maxVal = 0;
 
-        while(fast && fast -> next)
-        {
-            slow = slow -> next;
-            fast = fast -> next -> next;
+        while (fast && fast->next) {
+            half.push_back(slow->val);
+            slow = slow->next;
+            fast = fast->next->next;
         }
 
-        ListNode *nextNode, *prev = NULL;
+        int res = 0;
+        int i = half.size() - 1;
+
         while (slow) {
-            nextNode = slow->next;
-            slow->next = prev;
-            prev = slow;
-            slow = nextNode;
+            res = max(res, half[i--] + slow->val);
+            slow = slow->next;
         }
 
-        while(prev)
-        {
-            maxVal = max(maxVal, head -> val + prev -> val);
-            prev = prev -> next;
-            head = head -> next;
-        }
-
-        return maxVal;
+        return res;
     }
 };

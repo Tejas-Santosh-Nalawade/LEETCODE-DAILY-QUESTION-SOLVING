@@ -1,37 +1,31 @@
 class Solution {
 public:
-    int maximumProduct(vector<int>& nums) 
-    {
-        int first_max = INT_MIN ;
-        int second_max = INT_MIN ;
-        int third_max = INT_MIN ;
+    int maximumProduct(vector<int>& nums) {
+        int min1 = INT_MAX, min2 = INT_MAX;
+        int max1 = INT_MIN, max2 = INT_MIN, max3 = INT_MIN;
 
-        int first_min = INT_MAX ;
-        int second_min = INT_MAX ;
+        for(int n:nums){
+            if(n <= min1){
+                min2 = min1;
+                min1 = n;
+            }
+            else if(n <= min2){
+                min2 = n;
+            }
+            if(n >=max1){
+                max3 = max2;
+                max2 = max1;
+                max1 = n;
 
-        for( int i = 0 ; i < nums.size() ; i++ )
-        {
-            if( nums[i] < first_min )
-            {
-                second_min = first_min ;
-                first_min = nums[i] ;
             }
-            else if( nums[i] < second_min )
-                second_min = nums[i] ;
-            if( nums[i] > first_max )
-            {
-                third_max = second_max ;
-                second_max = first_max ;
-                first_max = nums[i] ;
+            else if(n >= max2){
+                max3 = max2;
+                max2 = n;
             }
-            else if( nums[i] > second_max )
-            {
-                third_max = second_max ;
-                second_max = nums[i] ;
+            else if(n >= max3){
+                max3 = n;
             }
-            else if( nums[i] > third_max )
-                third_max = nums[i] ;
-        }
-        return max (first_max * second_max * third_max , first_min * second_min * first_max );
+        } 
+        return max(min1 * min2 * max1, max1 * max2 * max3);
     }
 };

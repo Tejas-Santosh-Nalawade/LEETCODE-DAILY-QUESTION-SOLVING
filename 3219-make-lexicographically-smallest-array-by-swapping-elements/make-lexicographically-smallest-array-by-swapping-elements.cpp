@@ -16,14 +16,14 @@ public:
             if (abs(numsSorted[i] - numsSorted[i - 1]) > limit) {
                 currGroup++;
             }
+
             numToGroup.insert(pair<int, int>(numsSorted[i], currGroup));
+
             if (groupToList.find(currGroup) == groupToList.end()) {
                 groupToList[currGroup] = list<int>();
             }
             groupToList[currGroup].push_back(numsSorted[i]);
         }
-
-
         for (int i = 0; i < nums.size(); i++) {
             int num = nums[i];
             int group = numToGroup[num];
